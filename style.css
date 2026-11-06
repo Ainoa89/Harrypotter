@@ -1,0 +1,708 @@
+
+/* ======================================
+   HARRY POTTER - HOGWARTS EXPERIENCE
+   Diseño mágico y dinámico
+====================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+    --gold: #d6b56d;
+    --gold-light: #ffe6a3;
+    --red: #740c20;
+    --dark: #100d12;
+    --card: #211820;
+    --text: #f4eee5;
+}
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* FONDO */
+
+body {
+    background:
+        radial-gradient(ellipse at top, #39202c, transparent 65%),
+        linear-gradient(135deg, #100d12, #1c1018, #09080b);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+}
+
+/* LUCES DE FONDO */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 10% 20%, #d6b56d18, transparent 25%),
+        radial-gradient(circle at 90% 70%, #740c201c, transparent 30%);
+}
+
+/* BARRA DE PROGRESO */
+
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, #740c20, #ffe6a3);
+    z-index: 9999;
+    box-shadow: 0 0 15px var(--gold);
+}
+
+/* CABECERA */
+
+header {
+    min-height: 300px;
+    padding: 65px 20px 45px;
+    text-align: center;
+    background:
+        linear-gradient(#100d12aa, #100d12dd),
+        radial-gradient(circle, #653044, #170d13 75%);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 10px 40px #0008;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(27px, 5vw, 48px);
+    color: var(--gold-light);
+    text-shadow: 0 0 15px #d6b56d80;
+    animation: magicTitle 3s infinite alternate;
+    margin-bottom: 35px;
+}
+
+@keyframes magicTitle {
+    from {
+        text-shadow: 0 0 8px #d6b56d50;
+    }
+    to {
+        text-shadow: 0 0 25px #d6b56d, 0 0 50px #d6b56d55;
+    }
+}
+
+/* NAVEGACIÓN */
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--gold-light);
+    padding: 11px 22px;
+    border: 1px solid #d6b56d60;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.35s ease;
+}
+
+nav a:hover {
+    background: var(--gold);
+    color: #170e12;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px #d6b56d70;
+}
+
+/* CONTENIDO */
+
+body > h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 34px;
+    text-align: center;
+    margin: 55px auto 20px;
+}
+
+body > p {
+    max-width: 950px;
+    margin: 20px auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #291d25, #171219);
+    border: 1px solid #d6b56d40;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px #0005;
+    font-size: 16px;
+    line-height: 2;
+    transition: 0.4s;
+}
+
+body > p:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px #d6b56d20;
+}
+
+strong {
+    color: var(--gold-light);
+}
+
+em {
+    color: #e6b9c7;
+}
+
+/* SEPARADOR */
+
+hr {
+    max-width: 800px;
+    margin: 60px auto;
+    border: none;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+}
+
+/* IMAGEN */
+
+body > img {
+    display: block;
+    width: 250px;
+    max-width: 80%;
+    margin: 45px auto 70px;
+    border: 4px solid var(--gold);
+    border-radius: 20px;
+    box-shadow: 0 0 25px #d6b56d50;
+    transition: 0.5s;
+}
+
+body > img:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 0 40px #d6b56d90;
+}
+
+/* FOOTER */
+
+footer {
+    background: #09070a;
+    border-top: 2px solid var(--gold);
+    text-align: center;
+    padding: 30px 15px;
+    color: #c5b99f;
+    font-size: 13px;
+}
+
+/* ELEMENTOS DINÁMICOS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ESTRELLAS */
+
+.magic-star {
+    position: fixed;
+    pointer-events: none;
+    color: var(--gold-light);
+    z-index: 1000;
+    animation: sparkle 1.5s ease-out forwards;
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.8) rotate(180deg);
+    }
+}
+
+/* BOTÓN DE TEMA */
+
+#theme-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1001;
+    width: 55px;
+    height: 55px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: #291d25;
+    color: var(--gold-light);
+    font-size: 23px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #d6b56d50;
+    transition: 0.3s;
+}
+
+#theme-toggle:hover {
+    transform: rotate(25deg) scale(1.1);
+}
+
+/* MODO CLARO */
+
+body.light-mode {
+    --text: #211820;
+    background: linear-gradient(135deg, #f8eedc, #e8d5b4);
+    color: #211820;
+}
+
+body.light-mode header {
+    background: linear-gradient(135deg, #592638, #291820);
+}
+
+body.light-mode body > p,
+body.light-mode .reveal {
+    color: #211820;
+}
+
+body.light-mode body > p {
+    background: #fff9ed;
+}
+
+body.light-mode footer {
+    background: #291820;
+    color: #fff0d0;
+}
+
+/* MÓVILES */
+
+@media (max-width: 768px) {
+    header {
+        min-height: 260px;
+        padding: 45px 15px;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    body > h2 {
+        font-size: 27px;
+    }
+
+    body > p {
+        width: 90%;
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    hr {
+        width: 80%;
+    }
+}
+
+/* ACCESIBILIDAD */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================================
+   HARRY POTTER - PELICULAS
+   Estilo cinematográfico Hogwarts
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* FONDO GENERAL */
+
+body {
+    background:
+        radial-gradient(circle at top, #462331, transparent 50%),
+        linear-gradient(135deg, #100b12, #21121b, #09070b);
+    color: #f5eee5;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.8;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* CABECERA */
+
+header {
+    min-height: 280px;
+    padding: 45px 20px;
+    background:
+        linear-gradient(#100b12a8, #100b12e8),
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #d6b56d;
+    box-shadow: 0 10px 35px #0009;
+}
+
+header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #ffe5a0;
+    text-shadow: 0 0 20px #d6b56d;
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 8px #d6b56d;
+    }
+    to {
+        text-shadow: 0 0 30px #ffe5a0,
+                     0 0 50px #d6b56d;
+    }
+}
+
+/* NAVEGACIÓN */
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    color: #ffe5a0;
+    text-decoration: none;
+    border: 1px solid #d6b56d;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: 0.4s;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background: #d6b56d;
+    color: #160e12;
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #d6b56d;
+}
+
+/* TABLA DE PELÍCULAS */
+
+table {
+    width: 90%;
+    max-width: 1150px;
+    margin: 55px auto;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #211820;
+    box-shadow: 0 10px 35px #0008;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+th {
+    background: linear-gradient(135deg, #741d32, #391321);
+    color: #ffe5a0;
+    padding: 20px 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    border: 1px solid #d6b56d !important;
+}
+
+td {
+    padding: 17px 12px;
+    text-align: center;
+    border: 1px solid #ffffff20 !important;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background: #30202b;
+}
+
+tr:nth-child(odd) {
+    background: #1d151d;
+}
+
+tbody tr:hover,
+table tr:not(:first-child):hover {
+    background: #593044;
+    color: #ffe5a0;
+    transform: scale(1.01);
+}
+
+/* TÍTULOS */
+
+h2 {
+    font-family: 'Cinzel', serif;
+    color: #e5c47d;
+    text-align: center;
+    font-size: clamp(25px, 4vw, 36px);
+    margin: 50px 15px 25px;
+    text-shadow: 0 0 15px #d6b56d60;
+}
+
+/* TEXTO DE HOGWARTS */
+
+body > p {
+    max-width: 950px;
+    margin: 25px auto;
+    padding: 28px;
+    background: linear-gradient(145deg, #30202b, #191119);
+    border: 1px solid #d6b56d55;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px #0006;
+    line-height: 2;
+}
+
+/* SEPARADOR */
+
+hr {
+    width: 75%;
+    margin: 60px auto;
+    height: 2px;
+    border: none;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #d6b56d,
+        transparent
+    );
+}
+
+/* LISTA DE LAS CUATRO CASAS */
+
+ul {
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 0 25px;
+    list-style: none;
+}
+
+li {
+    padding: 18px 22px;
+    margin: 18px 0 5px;
+    background: #241923;
+    border-radius: 12px;
+    border-left: 5px solid #d6b56d;
+    color: #f5eee5;
+    font-weight: 500;
+    transition: 0.4s;
+    box-shadow: 0 5px 20px #0005;
+}
+
+li strong {
+    font-family: 'Cinzel', serif;
+    font-size: 19px;
+    color: #ffe5a0;
+}
+
+li:nth-child(1) {
+    border-left-color: #b52b35;
+}
+
+li:nth-child(3) {
+    border-left-color: #25a7a0;
+}
+
+li:nth-child(5) {
+    border-left-color: #3676c9;
+}
+
+li:nth-child(7) {
+    border-left-color: #e5bd35;
+}
+
+li:hover {
+    transform: translateX(10px);
+    background: #402638;
+}
+
+/* IMAGEN DE LAS CASAS */
+
+body > a:first-of-type {
+    display: block;
+    width: fit-content;
+    max-width: 90%;
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid #d6b56d;
+    box-shadow: 0 0 25px #d6b56d55;
+}
+
+body > a:first-of-type img {
+    display: block;
+    width: 400px;
+    max-width: 100%;
+    transition: 0.5s;
+}
+
+body > a:first-of-type img:hover {
+    transform: scale(1.08);
+    filter: brightness(1.2);
+}
+
+/* BOTÓN TRÁILER */
+
+body > a:last-of-type {
+    display: block;
+    width: fit-content;
+    margin: 40px auto 15px;
+    text-decoration: none;
+}
+
+button {
+    padding: 16px 35px;
+    border: 2px solid #ffe5a0;
+    border-radius: 35px;
+    background: linear-gradient(135deg, #8a1833, #451224);
+    color: #ffe5a0;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 5px 20px #0008;
+}
+
+button:hover {
+    background: #d6b56d;
+    color: #190f13;
+    transform: scale(1.08);
+    box-shadow: 0 0 30px #d6b56d;
+}
+
+/* TEXTO DEL TRÁILER */
+
+body > a:last-of-type + p {
+    text-align: center;
+    margin: 20px auto 50px;
+    padding: 10px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #09070a;
+    border-top: 2px solid #d6b56d;
+    padding: 30px;
+    text-align: center;
+    color: #d6b56d;
+    font-size: 13px;
+}
+
+/* ANIMACIONES AL CARGAR */
+
+table,
+ul,
+body > p,
+body > a {
+    animation: appear 0.9s ease both;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    header {
+        min-height: 240px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav {
+        gap: 8px;
+    }
+
+    nav a {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    table {
+        width: 95%;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+
+    body > p {
+        width: 85%;
+        padding: 20px;
+    }
+
+    ul {
+        padding: 0 18px;
+    }
+
+    li {
+        padding: 15px;
+    }
+
+    body > a:first-of-type img {
+        width: 100%;
+    }
+}
+
+/* ACCESIBILIDAD */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
